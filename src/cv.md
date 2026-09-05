@@ -71,7 +71,7 @@ As Tech Lead I drove the migration to a microservices architecture on AKS, owned
 
 For three and a half years I was the technical reference and escalation point for a cross-functional team of seven to ten engineers plus QA.
 
-I owned the full release lifecycle — planning, coordination, production deployment, post-release support — and production incident resolution for business-critical applications. The job was to make the team faster and calmer at the same time.
+I owned the full release lifecycle — planning, coordination, production deployment, post-release support — and was part of the 24/7 on-call rotation for the whole period, resolving production incidents for high-volume clients such as bet365. The job was to make the team faster and calmer at the same time.
 
 ---
 
