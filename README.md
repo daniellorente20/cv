@@ -4,7 +4,7 @@ Markdown-based CV. The single source of truth is [`src/cv.md`](src/cv.md).
 
 It is rendered and published by [cvmd.sh](https://cvmd.foreignkey.sh) on every push to `main`, as a web page and as a PDF.
 
-Live version: _[add URL once cvmd.sh is connected]_
+Live version: https://daniellorente20.github.io/cv/
 
 ## Editing
 
