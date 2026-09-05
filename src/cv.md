@@ -31,51 +31,27 @@ Ten years in, my path has gone from full-stack developer to tech lead of a ten-p
 
 ## Selected Contributions
 
-### Per-Domain Preview Environment Platform
+### Isolated Test Environments for a 200-Engineer Monorepo
 
-Factorial's 200+ engineers ship from one monorepo organised into product domains, and each domain gets its own preview environment.
+Factorial ships from one monorepo organised into product domains, and testing happened in shared environments, where one team's deploy could break another team's testing.
 
-I built the per-domain preview platform from the first environment to the ninth. Each product domain gets an isolated environment on Azure and Kubernetes with its own MySQL schema, Redis, Kafka consumer groups and ClickHouse database, promoted through Kargo, synced by ArgoCD, routed through Cloudflare, with scoped RBAC for the operators and a runbook so the tenth environment does not need me. Along the way I fixed the things that only break at this scale: paused ScaledObjects freezing syncs, canary metrics aborting rollouts, replica floors sized for production rather than preview.
+I built the platform that gives each domain its own complete, isolated copy of the product to test on (a preview environment): its own MySQL schema, Redis, Kafka consumer groups and ClickHouse database on Azure and Kubernetes, promoted through Kargo, synced by ArgoCD, routed through Cloudflare, with scoped RBAC for the operators and a runbook so the tenth environment does not need me. Along the way I fixed the things that only break at this scale: paused autoscalers freezing deployments, canary metrics aborting rollouts, replica floors sized for production rather than testing.
 
-**Impact:** nine isolated preview environments, one per domain, in seven weeks. **Scale:** 200+ engineers; 73 pull requests in the infrastructure repository alone.
+**Impact:** nine isolated environments, one per domain, in seven weeks; teams test and demo real changes without stepping on each other. **Scale:** 200+ engineers; 73 pull requests in the infrastructure repository alone.
 
 **Tech:** Terraform, Azure, Kubernetes, ArgoCD, Kargo, Kafka, Redis, MySQL, ClickHouse, Cloudflare
 
 ---
 
-### AI Agent Infrastructure in Preview Environments
+### Preview Tooling: Deploy Pipeline, AI Agent Infrastructure and Quality Dashboard
 
-Factorial ships an AI agent as part of the product, and each preview environment runs its own instance of it.
+Around the platform I built the tooling that makes it usable day to day, inside Factorial's workflows-as-code CI (a hundred-plus workflows generated from TypeScript templates).
 
-I gave every preview environment a dedicated agent deployment, wired LLM tracing into the agent previews, and documented the capacity units the AI deployments consume on Azure so provisioning stopped being guesswork. I also contributed to the internal MCP development setup engineers use to build against the agent.
+I wrote the `preview-per-domain` workflow template and the tested TypeScript package behind it: domain resolution, Slack notifications to eight domain channels that fire only when the rollout actually serves traffic, database autoprovisioning from a baked seed snapshot with a confirm-before-wipe reseed flow, and a previews view in the delivery-status dashboard. Every preview also runs a dedicated instance of Factorial's AI agent, with LLM tracing wired in and the Azure capacity units documented so provisioning stopped being guesswork. And I built the engineering quality dashboard: SLA facts derived from Jira per domain and squad, scores frozen at month end, sealed quarterly, auditable by anyone.
 
-**Impact:** agent changes can be tested per domain, in isolation, with traces.
+**Impact:** deploy, reseed and observe a domain preview without asking anyone; agent changes testable per domain, in isolation, with traces.
 
-**Tech:** Kubernetes, ArgoCD, Azure AI, Langfuse, MCP
-
----
-
-### Preview Deploy Pipeline: Workflows-as-Code, Seeding and Dashboard
-
-Factorial's CI is not hand-written YAML: a hundred-plus workflows are generated from TypeScript templates over a shared workflow abstraction. The preview pipeline lives inside that system.
-
-I wrote the `preview-per-domain` workflow template and the tested TypeScript package behind it: domain resolution, preview identifiers, and Slack notifications that route to eight domain channels and fire only when the rollout actually serves traffic. I built database autoprovisioning from a baked seed snapshot (reseeded once per image, not once per pod start) with a confirm-before-wipe reseed flow, fixed two build bugs that only surfaced at this scale, and added a previews view to the delivery-status dashboard: health checks, branch and Actions links, deploy time, logs per environment.
-
-**Impact:** deploy, reseed and observe a domain preview without asking anyone.
-
-**Tech:** GitHub Actions, TypeScript, workflows-as-code, Slack Block Kit, Docker / BuildKit, AWS ECR, Datadog
-
----
-
-### Engineering Quality and SLA Dashboard
-
-Engineering quality at Factorial is measured per domain and squad against SLAs derived from Jira.
-
-I built the quality model and its dashboard: SLA facts derived from Jira per domain and squad, scores frozen at month end (resolution state and ticket priority as of the close, not live), quarterly results sealed in a step that is invocable, re-executable and auditable, historical data backfilled, and a "How it works" panel that explains every label so anyone can check the maths.
-
-**Impact:** a quality score that does not move after the month closes, and that anyone can audit.
-
-**Tech:** TypeScript, Bun, Drizzle ORM, Jira API
+**Tech:** GitHub Actions, TypeScript, Kubernetes, ArgoCD, Azure AI, Langfuse, MCP, Slack Block Kit, Datadog, Jira API
 
 ---
 
@@ -83,11 +59,19 @@ I built the quality model and its dashboard: SLA facts derived from Jira per dom
 
 At Pay Retailers, a payments company, the core applications were legacy .NET monoliths with 20% test coverage and no shared standard for what to test.
 
-As Tech Lead I drove the migration to a microservices architecture on AKS, owned the Azure and Kubernetes infrastructure, led the move of multiple services to .NET 10, and championed event-driven patterns to reduce coupling. In parallel I established the team's testing standards, made integration tests a gate before merge, and drove coverage to 80%. I owned releases end to end for a ten-person team throughout.
+As Tech Lead I drove the migration to a microservices architecture on AKS, owned the Azure and Kubernetes infrastructure, led the move of multiple services to .NET 10, and championed event-driven patterns to reduce coupling. In parallel I established the team's testing standards, made integration tests a gate before merge, and drove coverage to 80%.
 
 **Impact:** independently deployable services on a modern runtime; release confidence became a property of the system rather than of the person deploying.
 
 **Tech:** C# / .NET 10, Azure, AKS, Docker, event-driven architecture
+
+---
+
+### Tech Lead: Release Ownership for a Ten-Person Team
+
+For three and a half years I was the technical reference and escalation point for a cross-functional team of seven to ten engineers plus QA.
+
+I owned the full release lifecycle — planning, coordination, production deployment, post-release support — and production incident resolution for business-critical applications. The job was to make the team faster and calmer at the same time.
 
 ---
 
