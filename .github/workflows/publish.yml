@@ -1,0 +1,63 @@
+name: Publish CV
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/cv.md'
+      - 'src/theme.css'
+      - '.github/workflows/publish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # The frontmatter is config for cvmd.sh, not content. Strip it so the
+      # renderer only sees markdown. The page build gets a PDF link on top.
+      - name: Prepare sources
+        run: |
+          mkdir -p out
+          awk 'BEGIN{fm=0} NR==1 && /^---$/{fm=1; next} fm==1 && /^---$/{fm=2; next} fm!=1{print}' src/cv.md > out/cv-print.md
+          { printf '<p class="pdf-link"><a href="cv.pdf">Download PDF</a></p>\n\n'; cat out/cv-print.md; } > out/cv-page.md
+
+      - name: Build PDF
+        run: npx md-to-pdf@5.2.5 out/cv-print.md --stylesheet src/theme.css --launch-options '{"args":["--no-sandbox","--disable-setuid-sandbox"]}'
+
+      - name: Build page
+        run: npx md-to-pdf@5.2.5 out/cv-page.md --as-html --stylesheet src/theme.css --launch-options '{"args":["--no-sandbox","--disable-setuid-sandbox"]}'
+
+      - name: Assemble site
+        run: |
+          mkdir site
+          mv out/cv-print.pdf site/cv.pdf
+          mv out/cv-page.html site/index.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

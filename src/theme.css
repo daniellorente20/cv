@@ -1,0 +1,119 @@
+/* CV theme for md-to-pdf. Mirrors the Tailwind overrides declared in the
+   cv.md frontmatter, translated to plain CSS (Tailwind default scale). */
+
+:root {
+  --text: #000;
+  --rule: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  max-width: 46rem;
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.625;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* h1: text-4xl font-bold tracking-tight mt-0 mb-2 */
+h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.5rem;
+}
+
+/* h2: text-2xl font-bold mt-2 mb-3 */
+h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0.75rem;
+}
+
+/* h3: text-xl font-semibold mt-6 mb-2 */
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem;
+}
+
+/* p: text-base leading-relaxed mb-4 */
+p {
+  margin: 0 0 1rem;
+}
+
+/* a: underline, same color as text */
+a {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+/* ul/ol: list markers, pl-8 mb-4; li: mb-2 */
+ul,
+ol {
+  padding-left: 2rem;
+  margin: 0 0 1rem;
+}
+
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+strong {
+  font-weight: 600;
+}
+
+em,
+blockquote {
+  font-style: italic;
+}
+
+blockquote {
+  margin: 0 0 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--rule);
+}
+
+/* code: font-mono text-sm tracking-wide */
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+}
+
+/* hr: border-t border-gray-200 mt-8 mb-8 */
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2rem 0;
+}
+
+.pdf-link {
+  text-align: right;
+  font-size: 0.875rem;
+}
+
+@media print {
+  body {
+    padding: 0;
+    max-width: none;
+  }
+}
