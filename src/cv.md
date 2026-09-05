@@ -43,15 +43,15 @@ I built the platform that gives each domain its own complete, isolated copy of t
 
 ---
 
-### Preview Tooling: Deploy Pipeline, AI Agent Infrastructure and Quality Dashboard
+### AI Agent Infrastructure in Preview Environments
 
-Around the platform I built the tooling that makes it usable day to day, inside Factorial's workflows-as-code CI (a hundred-plus workflows generated from TypeScript templates).
+Factorial ships an AI agent as part of the product, and each preview environment runs its own instance of it.
 
-I wrote the `preview-per-domain` workflow template and the tested TypeScript package behind it: domain resolution, Slack notifications to eight domain channels that fire only when the rollout actually serves traffic, database autoprovisioning from a baked seed snapshot with a confirm-before-wipe reseed flow, and a previews view in the delivery-status dashboard. Every preview also runs a dedicated instance of Factorial's AI agent, with LLM tracing wired in and the Azure capacity units documented so provisioning stopped being guesswork. And I built the engineering quality dashboard: SLA facts derived from Jira per domain and squad, scores frozen at month end, sealed quarterly, auditable by anyone.
+I built that infrastructure: a dedicated agent deployment per environment, LLM tracing wired in, and the Azure capacity units documented so provisioning stopped being guesswork.
 
-**Impact:** deploy, reseed and observe a domain preview without asking anyone; agent changes testable per domain, in isolation, with traces.
+**Impact:** agent changes testable per domain, in isolation, with traces.
 
-**Tech:** GitHub Actions, TypeScript, Kubernetes, ArgoCD, Azure AI, Langfuse, MCP, Slack Block Kit, Datadog, Jira API
+**Tech:** Kubernetes, ArgoCD, Azure AI, Langfuse, MCP
 
 ---
 
