@@ -43,15 +43,15 @@ I built the platform that gives each domain its own complete, isolated copy of t
 
 ---
 
-### AI Agent Infrastructure in Preview Environments
+### Preview Tooling: Deploy Pipeline, AI Agent Infrastructure and Quality Dashboard
 
-Factorial ships an AI agent as part of the product, and each preview environment runs its own instance of it.
+Around the platform I built the tooling that makes it usable day to day, inside Factorial's workflows-as-code CI (a hundred-plus workflows generated from TypeScript templates).
 
-I built that infrastructure: a dedicated agent deployment per environment, LLM tracing wired in, and the Azure capacity units documented so provisioning stopped being guesswork.
+I wrote the `preview-per-domain` workflow template and the tested TypeScript package behind it: domain resolution, Slack notifications to eight domain channels that fire only when the rollout actually serves traffic, database autoprovisioning from a baked seed snapshot with a confirm-before-wipe reseed flow, and a previews view in the delivery-status dashboard. Every preview also runs a dedicated instance of Factorial's AI agent, with LLM tracing wired in and the Azure capacity units documented so provisioning stopped being guesswork. And I built the engineering quality dashboard: SLA facts derived from Jira per domain and squad, scores frozen at month end, sealed quarterly, auditable by anyone.
 
-**Impact:** agent changes testable per domain, in isolation, with traces.
+**Impact:** deploy, reseed and observe a domain preview without asking anyone; agent changes testable per domain, in isolation, with traces.
 
-**Tech:** Kubernetes, ArgoCD, Azure AI, Langfuse, MCP
+**Tech:** GitHub Actions, TypeScript, Kubernetes, ArgoCD, Azure AI, Langfuse, MCP, Slack Block Kit, Datadog, Jira API
 
 ---
 
@@ -107,7 +107,7 @@ Joined as a senior developer on the .NET backend; moved into the Tech Lead role 
 
 ### Nexus Energía — Barcelona, Spain (2020 – 2022)
 
-**Full-Stack Developer** — .NET and Angular application development for an energy company. Refactored middleware and added integration tests to validate it. Worked directly with the client on requirements. Integrations with SAP, OpenText and Mailchimp.
+**Full-Stack Developer** — Built the web application where the company's B2C customers view their electricity consumption, invoices and supply details, in .NET and Angular. Refactored middleware and added integration tests to validate it. Worked directly with the client on requirements. Integrations with SAP, OpenText and Mailchimp.
 
 **Tech:** C# / .NET, Angular, SQL Server
 
