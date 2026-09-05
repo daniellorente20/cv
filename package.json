@@ -1,0 +1,14 @@
+{
+  "name": "cv",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "upload-cv": "source .env && npx tsx scripts/upload-cv.ts"
+  },
+  "devDependencies": {
+    "@vercel/blob": "^0.25.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
