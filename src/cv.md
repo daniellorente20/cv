@@ -75,6 +75,19 @@ I owned the full release lifecycle — planning, coordination, production deploy
 
 ---
 
+### B2C Customer Portal for an Energy Company
+
+At Nexus Energía, an electricity provider, I built the web application
+where B2C customers view their electricity consumption, invoices and
+supply details.
+
+I developed it full-stack, .NET backend and Angular frontend on SQL
+Server, working directly with the client on requirements.
+
+**Tech:** C# / .NET, Angular, SQL Server
+
+---
+
 ### gestion-dental — Clinic Management System *(personal project)*
 
 A full-stack dental clinic management application, built with a small team: separate frontend and backend repositories, pull-request-driven workflow, continuous delivery. It is where I try things before I trust them at work.
@@ -107,7 +120,7 @@ Joined as a senior developer on the .NET backend; moved into the Tech Lead role 
 
 ### Nexus Energía — Barcelona, Spain (2020 – 2022)
 
-**Full-Stack Developer** — Built the web application where the company's B2C customers view their electricity consumption, invoices and supply details, in .NET and Angular. Refactored middleware and added integration tests to validate it. Worked directly with the client on requirements. Integrations with SAP, OpenText and Mailchimp.
+**Full-Stack Developer** — .NET and Angular development for an energy company. Refactored middleware and added integration tests to validate it. Worked directly with the client on requirements. Integrations with SAP, OpenText and Mailchimp.
 
 **Tech:** C# / .NET, Angular, SQL Server
 
