@@ -9,6 +9,8 @@ Live version: https://daniellorente20.github.io/cv/
 
 PDF: https://daniellorente20.github.io/cv/cv.pdf
 
+JSON: https://daniellorente20.github.io/cv/cv.json
+
 ## Editing
 
 Edit `src/cv.md` and push to `main`. That is the whole workflow.

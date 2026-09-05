@@ -37,7 +37,7 @@ jobs:
           { printf '<p class="pdf-link"><a href="cv.pdf">Download PDF</a></p>\n\n'; cat out/cv-print.md; } > out/cv-page.md
 
       - name: Build PDF
-        run: npx md-to-pdf@5.2.5 out/cv-print.md --stylesheet src/theme.css --page-media-type print --document-title "Daniel Lorente Colmenares" --pdf-options '{"format":"a4","margin":{"top":"16mm","right":"17mm","bottom":"16mm","left":"17mm"},"printBackground":true}' --launch-options '{"args":["--no-sandbox","--disable-setuid-sandbox"]}'
+        run: npx md-to-pdf@5.2.5 out/cv-print.md --stylesheet src/theme.css --page-media-type print --document-title "Daniel Lorente Colmenares" --pdf-options '{"format":"a4","margin":{"top":"12mm","right":"14mm","bottom":"12mm","left":"14mm"},"printBackground":true}' --launch-options '{"args":["--no-sandbox","--disable-setuid-sandbox"]}'
 
       - name: Build page
         run: npx md-to-pdf@5.2.5 out/cv-page.md --as-html --stylesheet src/theme.css --launch-options '{"args":["--no-sandbox","--disable-setuid-sandbox"]}'
@@ -47,6 +47,73 @@ jobs:
           mkdir site
           mv out/cv-print.pdf site/cv.pdf
           mv out/cv-page.html site/index.html
+
+      - name: Build JSON
+        run: |
+          python3 - <<'PY'
+          import json, re, subprocess
+
+          md = open('src/cv.md').read()
+          if md.startswith('---\n'):
+              md = md.split('\n---\n', 1)[1]
+          body = md.strip()
+
+          name_m = re.search(r'^# (.+)$', body, re.M)
+          name = name_m.group(1).strip() if name_m else ''
+          after = body[name_m.end():] if name_m else body
+          head, _, rest = after.partition('\n---\n')
+
+          location = next((l.strip() for l in head.strip().splitlines() if l.strip()), '')
+          email_m = re.search(r'[\w.+-]+@[\w-]+\.[\w.]+', head)
+          links = [{'label': t, 'url': u} for t, u in re.findall(r'\[([^\]]+)\]\(([^)]+)\)', head)]
+
+          pre, _, _ = rest.partition('\n## ')
+          summary = pre.strip().strip('-').strip()
+
+          sections = []
+          for chunk in re.split(r'\n(?=## )', rest):
+              if not chunk.startswith('## '):
+                  continue
+              title, _, content = chunk.partition('\n')
+              subs = []
+              main, *subchunks = re.split(r'\n(?=### )', content)
+              for sc in subchunks:
+                  st, _, sb = sc.partition('\n')
+                  subs.append({'title': st.replace('### ', '').strip(),
+                               'content': sb.strip().strip('-').strip()})
+              sections.append({'title': title.replace('## ', '').strip(),
+                               'content': main.strip().strip('-').strip(),
+                               'subsections': subs})
+
+          updated = subprocess.run(['git', 'log', '-1', '--format=%cI', '--', 'src/cv.md'],
+                                   capture_output=True, text=True).stdout.strip()
+
+          base = 'https://daniellorente20.github.io/cv'
+          data = {'name': name, 'location': location,
+                  'email': email_m.group(0) if email_m else None,
+                  'links': links, 'summary': summary, 'sections': sections,
+                  'updated': updated,
+                  'source': 'https://github.com/daniellorente20/cv',
+                  'formats': {'html': base + '/', 'pdf': base + '/cv.pdf', 'json': base + '/cv.json'}}
+          json.dump(data, open('site/cv.json', 'w'), ensure_ascii=False, indent=2)
+          print('cv.json:', len(sections), 'sections')
+          PY
+
+      - name: Inject analytics
+        run: |
+          python3 - <<'PY'
+          p = 'site/index.html'
+          s = open(p).read()
+          snip = '<script data-goatcounter="https://daniellorente20.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
+          if snip in s:
+              pass
+          elif '</body>' in s:
+              s = s.replace('</body>', snip + '\n</body>')
+          else:
+              s += '\n' + snip + '\n'
+          open(p, 'w').write(s)
+          print('analytics injected')
+          PY
 
       - uses: actions/upload-pages-artifact@v3
         with:

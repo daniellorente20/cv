@@ -79,6 +79,18 @@ I built the quality model and its dashboard: SLA facts derived from Jira per dom
 
 ---
 
+### Monolith to Microservices on AKS, Test Coverage from 20% to 80%
+
+At Pay Retailers, a payments company, the core applications were legacy .NET monoliths with 20% test coverage and no shared standard for what to test.
+
+As Tech Lead I drove the migration to a microservices architecture on AKS, owned the Azure and Kubernetes infrastructure, led the move of multiple services to .NET 10, and championed event-driven patterns to reduce coupling. In parallel I established the team's testing standards, made integration tests a gate before merge, and drove coverage to 80%. I owned releases end to end for a ten-person team throughout.
+
+**Impact:** independently deployable services on a modern runtime; release confidence became a property of the system rather than of the person deploying.
+
+**Tech:** C# / .NET 10, Azure, AKS, Docker, event-driven architecture
+
+---
+
 ### gestion-dental — Clinic Management System *(personal project)*
 
 A full-stack dental clinic management application, built with a small team: separate frontend and backend repositories, pull-request-driven workflow, continuous delivery. It is where I try things before I trust them at work.
@@ -100,7 +112,7 @@ A full-stack dental clinic management application, built with a small team: sepa
 ### Pay Retailers — Barcelona, Spain (2022 – 2026)
 
 **Tech Lead (Aug 2022 – Mar 2026)**  
-Led a cross-functional team of up to ten. Owned releases end to end — planning, coordination, production deployment, post-release support — and production incident resolution for business-critical applications. Drove the monolith-to-microservices migration on AKS, the .NET 10 upgrade, and the testing culture that took coverage from 20% to 80%. Hands-on in C# / .NET backend and React frontend throughout.
+Led a cross-functional team of up to ten. Owned releases end to end — planning, coordination, production deployment, post-release support — and production incident resolution for business-critical applications. Hands-on in C# / .NET backend and React frontend throughout.
 
 **Senior Software Engineer (Jun 2022 – Aug 2022)**  
 Joined as a senior developer on the .NET backend; moved into the Tech Lead role after two months.

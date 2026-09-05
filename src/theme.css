@@ -117,40 +117,40 @@ hr {
   body {
     padding: 0;
     max-width: none;
-    font-size: 0.84rem;
-    line-height: 1.45;
+    font-size: 0.8rem;
+    line-height: 1.4;
   }
 
   h1 {
-    font-size: 1.6rem;
-    line-height: 1.8rem;
+    font-size: 1.5rem;
+    line-height: 1.7rem;
   }
 
   h2 {
-    font-size: 1.15rem;
-    line-height: 1.4rem;
-    margin: 0.4rem 0 0.5rem;
+    font-size: 1.1rem;
+    line-height: 1.3rem;
+    margin: 0.3rem 0 0.4rem;
     break-after: avoid;
   }
 
   h3 {
-    font-size: 1rem;
-    line-height: 1.3rem;
-    margin: 0.9rem 0 0.35rem;
+    font-size: 0.95rem;
+    line-height: 1.2rem;
+    margin: 0.7rem 0 0.3rem;
     break-after: avoid;
   }
 
   p,
   ul,
   ol {
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.45rem;
   }
 
   li {
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.15rem;
   }
 
   hr {
-    margin: 0.9rem 0;
+    margin: 0.55rem 0;
   }
 }
