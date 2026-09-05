@@ -25,9 +25,7 @@ daniellorente20@gmail.com · [linkedin.com/in/daniellorente20](https://linkedin.
 
 I build the layer that lets engineering teams ship without thinking about it — including the layer their AI ships on.
 
-Ten years in, my path has gone from full-stack developer to tech lead of a ten-person team to Senior AI Engineer at Factorial, where 200+ engineers work in one monorepo. The constant is where I end up: environments, pipelines, deployment tooling, the infrastructure under the product. The unglamorous layer where one fix compounds across every engineer who touches it.
-
-At Factorial that cuts both ways. I work spec-first with coding agents, in a codebase where every pull request is reviewed by agentic checks — I write the spec, the agents write most of the code, and I keep my own time for the design, the verification and the judgement call about whether the result is right. And I run the infrastructure the company's own AI agent is tested on. Spec-driven development is what makes the first part safe; the second part is what makes me useful to the people building the agent.
+Ten years in, my path has gone from full-stack developer to tech lead of a ten-person team to Senior AI Engineer at Factorial, where 200+ engineers work in one monorepo. The constant is where I end up: environments, pipelines, deployment tooling, the infrastructure under the product. The unglamorous layer where one fix compounds across every engineer who touches it. I work spec-first with coding agents: I write the spec, the agents write most of the code, and I keep my own time for the design, the verification and the judgement call about whether the result is right.
 
 ---
 
@@ -57,11 +55,11 @@ I gave every preview environment a dedicated agent deployment, wired LLM tracing
 
 ---
 
-### Preview Deploy Pipeline: Workflows-as-Code, Seeding, Notifications and Dashboard
+### Preview Deploy Pipeline: Workflows-as-Code, Seeding and Dashboard
 
 Factorial's CI is not hand-written YAML: a hundred-plus workflows are generated from TypeScript templates over a shared workflow abstraction. The preview pipeline lives inside that system.
 
-I wrote the `preview-per-domain` workflow template and a tested TypeScript package behind it — domain resolution, preview identifiers, a Slack Block Kit notification builder and its sender, the domain-to-channel mapping — each module with its own unit tests. The notifications route to eight domain channels, name the domain, link to the running environment, and fire only when the rollout actually serves traffic. I built database autoprovisioning from a baked seed snapshot (reseeded once per image, not once per pod start) and a reseed flow with a database dropdown and confirm-before-wipe. I fixed two build bugs that only surfaced at this scale: preview builds ignoring the bundle image they had just produced, and builds not seeing the PR's own dependencies. I extended the shared workflow abstraction with configurable run names so a CI run says what it is deploying. And on the dashboard side I added a previews view to the delivery-status app: health checks, deployed-by and branch links, Actions run links, deploy time, a Datadog logs button per environment.
+I wrote the `preview-per-domain` workflow template and the tested TypeScript package behind it: domain resolution, preview identifiers, and Slack notifications that route to eight domain channels and fire only when the rollout actually serves traffic. I built database autoprovisioning from a baked seed snapshot (reseeded once per image, not once per pod start) with a confirm-before-wipe reseed flow, fixed two build bugs that only surfaced at this scale, and added a previews view to the delivery-status dashboard: health checks, branch and Actions links, deploy time, logs per environment.
 
 **Impact:** deploy, reseed and observe a domain preview without asking anyone.
 
@@ -81,43 +79,9 @@ I built the quality model and its dashboard: SLA facts derived from Jira per dom
 
 ---
 
-### Monolith to Microservices on Azure Kubernetes Service
-
-At Pay Retailers, a payments company, the core applications were legacy .NET monoliths that were increasingly hard to scale and change safely.
-
-As Tech Lead I drove the migration to a microservices architecture on AKS, owned the Azure and Kubernetes infrastructure (container orchestration, scaling policies, resource optimisation), and led the move of multiple services to .NET 10. I championed event-driven and asynchronous patterns to reduce coupling between services.
-
-**Impact:** independently deployable services on a modern runtime, with infrastructure the team could reason about.
-
-**Tech:** C# / .NET 10, Azure, AKS, Docker, event-driven architecture
-
----
-
-### Test Coverage from 20% to 80%
-
-The same codebase had 20% test coverage and no shared standard for what to test or how.
-
-I established testing standards across the team, introduced integration testing as a gate before merge, and drove coverage to 80% over the course of the engagement. Coverage was the metric; the goal was being able to deploy to production without holding our breath.
-
-**Impact:** 20% → 80% coverage; release confidence became a property of the system rather than of the person deploying.
-
-**Tech:** .NET test tooling, CI pipelines
-
----
-
-### Tech Lead: Release Ownership for a Ten-Person Team
-
-For three and a half years I was the technical reference and escalation point for a cross-functional team of seven to ten engineers plus QA.
-
-I owned the full release lifecycle — planning, coordination, production deployment, post-release support — and production incident resolution for business-critical applications. The job was to make the team faster and calmer at the same time.
-
----
-
 ### gestion-dental — Clinic Management System *(personal project)*
 
-A full-stack dental clinic management application, built with a small team.
-
-Separate frontend and backend repositories, pull-request-driven workflow, continuous delivery. It is where I try things before I trust them at work.
+A full-stack dental clinic management application, built with a small team: separate frontend and backend repositories, pull-request-driven workflow, continuous delivery. It is where I try things before I trust them at work.
 
 **Tech:** .NET 10, React, Next.js
 
@@ -127,7 +91,7 @@ Separate frontend and backend repositories, pull-request-driven workflow, contin
 
 ### Factorial — Barcelona, Spain (Jun 2026 – present)
 
-**Senior AI Engineer** — Built the per-domain preview environment platform (nine isolated environments on Azure and Kubernetes), the AI agent infrastructure that runs in them, the workflows-as-code pipeline and dashboard around them, and an engineering quality dashboard: 148 pull requests across 8 repositories in the first three months. The monorepo's CI is generated from TypeScript templates and every pull request is reviewed by agentic checks — architecture, correctness, database, performance, security — alongside a catalogue of skills that coding agents load per domain. I work spec-first inside that system, and I maintain and optimise the tooling it runs on. Also hands-on in the product where needed — ClickHouse migrations and adapter fixes, finance, contracts, billing, developer onboarding tooling.
+**Senior AI Engineer** — Own the per-domain preview environment platform and the AI agent infrastructure that runs in it, plus the workflows-as-code pipeline and dashboards around them: 148 pull requests across 8 repositories in the first three months. Every pull request in the monorepo is reviewed by agentic checks — architecture, correctness, database, performance, security — and I work spec-first inside that system while maintaining and optimising the tooling it runs on. Also hands-on in the product where needed: ClickHouse migrations and adapter fixes, finance, contracts, billing, developer onboarding tooling.
 
 **Tech:** Terraform, Azure, Kubernetes, ArgoCD, Kargo, Kafka, Redis, MySQL, ClickHouse, Cloudflare, Datadog, Langfuse, GitHub Actions, TypeScript, React
 
@@ -136,7 +100,7 @@ Separate frontend and backend repositories, pull-request-driven workflow, contin
 ### Pay Retailers — Barcelona, Spain (2022 – 2026)
 
 **Tech Lead (Aug 2022 – Mar 2026)**  
-Led a cross-functional team of up to ten. Owned releases end to end. Drove the monolith-to-microservices migration on AKS, the .NET 10 upgrade, and the testing culture that took coverage from 20% to 80%. Hands-on in C# / .NET backend and React frontend throughout.
+Led a cross-functional team of up to ten. Owned releases end to end — planning, coordination, production deployment, post-release support — and production incident resolution for business-critical applications. Drove the monolith-to-microservices migration on AKS, the .NET 10 upgrade, and the testing culture that took coverage from 20% to 80%. Hands-on in C# / .NET backend and React frontend throughout.
 
 **Senior Software Engineer (Jun 2022 – Aug 2022)**  
 Joined as a senior developer on the .NET backend; moved into the Tech Lead role after two months.

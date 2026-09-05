@@ -111,9 +111,46 @@ hr {
   font-size: 0.875rem;
 }
 
+/* PDF build. The workflow renders with --page-media-type print, so this
+   block applies only to the PDF; the web page keeps the sizes above. */
 @media print {
   body {
     padding: 0;
     max-width: none;
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    line-height: 1.4rem;
+    margin: 0.4rem 0 0.5rem;
+    break-after: avoid;
+  }
+
+  h3 {
+    font-size: 1rem;
+    line-height: 1.3rem;
+    margin: 0.9rem 0 0.35rem;
+    break-after: avoid;
+  }
+
+  p,
+  ul,
+  ol {
+    margin-bottom: 0.6rem;
+  }
+
+  li {
+    margin-bottom: 0.2rem;
+  }
+
+  hr {
+    margin: 0.9rem 0;
   }
 }
