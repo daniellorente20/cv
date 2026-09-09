@@ -15,6 +15,4 @@ JSON: https://daniellorente20.github.io/cv/cv.json
 
 Edit `src/cv.md` and push to `main`. That is the whole workflow.
 
-Styling lives in [`src/theme.css`](src/theme.css). The YAML frontmatter
-at the top of `cv.md` holds theme overrides for cvmd.sh; the current
-pipeline ignores it, and it stays only in case that renderer returns.
+Styling lives in [`src/theme.css`](src/theme.css).

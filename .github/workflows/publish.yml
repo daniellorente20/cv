@@ -28,12 +28,11 @@ jobs:
         with:
           node-version: '22'
 
-      # The frontmatter is config for cvmd.sh, not content. Strip it so the
-      # renderer only sees markdown. The page build gets a PDF link on top.
+      # The page build gets a PDF link on top; the print build does not.
       - name: Prepare sources
         run: |
           mkdir -p out
-          awk 'BEGIN{fm=0} NR==1 && /^---$/{fm=1; next} fm==1 && /^---$/{fm=2; next} fm!=1{print}' src/cv.md > out/cv-print.md
+          cp src/cv.md out/cv-print.md
           { printf '<p class="pdf-link"><a href="cv.pdf">Download PDF</a></p>\n\n'; cat out/cv-print.md; } > out/cv-page.md
 
       - name: Build PDF
@@ -53,10 +52,7 @@ jobs:
           python3 - <<'PY'
           import json, re, subprocess
 
-          md = open('src/cv.md').read()
-          if md.startswith('---\n'):
-              md = md.split('\n---\n', 1)[1]
-          body = md.strip()
+          body = open('src/cv.md').read().strip()
 
           name_m = re.search(r'^# (.+)$', body, re.M)
           name = name_m.group(1).strip() if name_m else ''
