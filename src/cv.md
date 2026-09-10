@@ -1,21 +1,3 @@
----
-theme:
-  overrides:
-    h1: "text-black text-4xl font-bold tracking-tight mt-0 mb-2"
-    h2: "text-black text-2xl font-bold mt-2 mb-3"
-    h3: "text-black text-xl font-semibold mt-6 mb-2"
-    p: "text-base leading-relaxed mb-4 text-black"
-    a: "text-black underline"
-    ul: "list-disc pl-8 mb-4"
-    ol: "list-decimal pl-8 mb-4"
-    li: "text-black mb-2"
-    strong: "font-semibold"
-    em: "italic"
-    blockquote: "text-black italic"
-    code: "text-black font-mono text-sm tracking-wide"
-    hr: "border-t border-gray-200 mt-8 mb-8"
----
-
 # Daniel Lorente Colmenares
 
 Barcelona, Spain  
